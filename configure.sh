@@ -10,6 +10,8 @@ VPN_DOMAIN=$(echo "$VPN_URL" | cut -d/ -f1)
 VPN_IP=$(nslookup "$VPN_DOMAIN" | awk '/^Address: / { print $2 }' | tail -n1)
 [ -z "$VPN_IP" ] && echo "Failed to resolve VPN IP" && exit 1
 
+opkg update && opkg install openconnect luci-proto-openconnect
+
 uci set network.oc0="interface"
 uci set network.oc0.proto="openconnect"
 uci set network.oc0.username="$VPN_USER"
