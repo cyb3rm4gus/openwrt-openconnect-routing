@@ -4,7 +4,7 @@ set -e
 printf "Enter VPN username: "
 read -r VPN_USER
 
-printf "Enter VPN password: "
+printf "Enter VPN password (visible): "
 read -r VPN_PASS
 
 printf "Enter VPN server URL (e.g. vpn.example.com/?secret): "
