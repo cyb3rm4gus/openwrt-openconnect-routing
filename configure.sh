@@ -111,8 +111,17 @@ else
 fi
 EOF
 
-
 chmod +x /etc/hotplug.d/iface/99-vpn-route
+
+cat << 'EOF' > /etc/hotplug.d/iface/99-set-vpn-mtu
+#!/bin/sh
+[ "$ACTION" = "ifup" ] || exit 0
+[ "$INTERFACE" = "oc0" ] || exit 0
+
+ip link set dev vpn-oc0 mtu 1350
+EOF
+
+chmod +x /etc/hotplug.d/iface/99-set-vpn-mtu
 
 echo "Created hotplug to set up routing"
 
